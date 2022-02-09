@@ -12,18 +12,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Dashboard_API =
-  "https://hfzx0rhmy6.execute-api.us-east-1.amazonaws.com/test/anonymous-embed-sample";
+  "https://hfzx0rhmy6.execute-api.us-east-1.amazonaws.com/test/anonymous-embed-sample?mode=getUrl";
 
 function App() {
   const classes = useStyles();
-  const [Dashboard, setDashboard] = useState([]);
+  const [Dashboard, setDashboard] = useState("");
 
   const getDashboard = (API) => {
     fetch(API)
       .then((res) => res.json())
       .then((data) => {
         console.log(data.EmbedUrl);
-        setDashboard([...data.EmbedUrl]);
+        setDashboard(data.EmbedUrl);
+        window.location.href = data.EmbedUrl;
       });
   };
 
@@ -42,7 +43,7 @@ function App() {
           className={classes.title}
           gutterBottom
         >
-          Amazon QuickSight Embed
+          Amazon QuickSight Dashboard Loading
         </Typography>
       </Container>
     </div>
